@@ -4,52 +4,40 @@
 
 {% block body %}
 {% include 'header.html.twig'%}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<br>
+<form class="">
+  <div class="">
+    <label for="type">Enter your name: </label>
+    <input type="text" name="type" value="" id="type">
+  </div>
+  <div class="">
+    <label for="descritpion">Enter a descritpion: </label>
+    <input type="text" name="descritpion" value="" id="descritpion">
+  </div>
+  <div class="">
+    <label for="recurrent">Is recurrent? </label>
+    <input type="radio" name="recurrent" value="True" id="recurrent">
+  </div>
+  <div class="">
+    <label for="amount">Enter the amount: </label>
+    <input type="text" name="amount" value="" id="amount">
+  </div>
+  <div class="">
+  <input type="submit" class="btn btn-primary" value="Save">
+  </div>
+</form>
+<script type="text/javascript">
+var fd = new FormData(document.querySelector("form"));
+  $.ajax({
+    url: {{path('expense')}},
+    type: "POST",
+    data: fd,
+    async: true,
+    processData: false,  // dire à jQuery de ne pas traiter les données
+    contentType: false   // dire à jQuery de ne pas définir le contentType
+  }).done(function(rep){
+    $(this).JSON.parse(rep);
+  });
+</script>
 
-
-<button type="button" class="btn btn-primary">Primary</button>
-<canvas id="myChart" width="400" height="400"></canvas>
-
-  {% block javascripts %}
-    <script>
-    var ctx = document.getElementById('myChart');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-    </script>
-  {% endblock %}
 {% endblock %}

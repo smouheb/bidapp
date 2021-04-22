@@ -11,4 +11,8 @@ import './styles/app.css';
 // start the Stimulus application
 import './bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import 'chart.js/dist/chart.min.js'
+
+var i = 0;
+for(i=0; i< 10; i++){
+  console.log(i);
+}
