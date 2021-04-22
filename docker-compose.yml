@@ -1,0 +1,32 @@
+version: "3"
+services:
+  db:
+    image: postgres:12.6
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: kidos
+      POSTGRES_USER: test
+      POSTGRES_DB: test
+    volumes:
+      - myvol:/var/lib/postgresql/data
+    networks:
+      - my-net
+
+  server:
+    image: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - /Users/smaelmouheb/Mentorat/bidapp:/var/www/bidapp/
+    networks:
+      - my-net
+
+  web:
+    image: app:01
+    networks:
+      - my-net
+
+networks:
+  my-net:
+volumes:
+  myvol:
